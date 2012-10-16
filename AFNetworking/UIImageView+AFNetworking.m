@@ -86,12 +86,19 @@ static char kAFImageRequestOperationObjectKey;
 
 - (void)setImageWithURL:(NSURL *)url 
        placeholderImage:(UIImage *)placeholderImage
-{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPShouldHandleCookies:NO];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-    
-    [self setImageWithURLRequest:request placeholderImage:placeholderImage success:nil failure:nil];
+{    
+    if (url)
+    {
+    	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    	[request setHTTPShouldHandleCookies:NO];
+    	[request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+
+        [self setImageWithURLRequest:request placeholderImage:placeholderImage success:nil failure:nil];
+    }
+    else
+    {
+        self.image = placeholderImage;
+    }
 }
 
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest 
