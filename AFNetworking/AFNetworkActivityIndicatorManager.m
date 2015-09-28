@@ -92,7 +92,9 @@ static NSTimeInterval const kAFNetworkActivityIndicatorInvisibilityDelay = 0.25;
 
 - (void)updateNetworkActivityIndicatorVisibility {
     dispatch_async(dispatch_get_main_queue(), ^{
+#if !TARGET_OS_TV
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:[self isNetworkActivityIndicatorVisible]];
+#endif
     });
 }
 
